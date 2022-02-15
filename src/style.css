@@ -5,10 +5,11 @@
 /* =============================== */
 
 :root {
-  --bg-color-body: #f6f6f6;
+  --bg-color-body: #d1cdb7;
   --bg-color-button: #f6f6f6;
   --bg-color-list: #fff;
   --color-title: #434346;
+  --color-active: #454138;
 }
 
 * {
@@ -30,6 +31,16 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--bg-color-body);
+  opacity: 0.8;
+  background-image: linear-gradient(
+      #ccc8b1 1px,
+      transparent 1px
+    ),
+    linear-gradient(to right, #ccc8b1 1px, #d1cdb7 1px);
+  background-size: 6px 6px;
+  box-shadow: rgb(50 50 93 / 25%) 0 20px 40px -12px inset,
+    rgb(0 0 0 / 30%) 0 18px 18px -18px inset;
 }
 
 a,
@@ -92,6 +103,7 @@ main {
   text-align: left;
   font-size: 16px;
   font-weight: 700;
+  text-shadow: 4px 4px 0 #bab5a1;
 }
 
 .title-section .icon {
