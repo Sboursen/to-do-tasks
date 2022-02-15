@@ -1,42 +1,22 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# TO DO LIST
 
-> Description the project.
-
+> **To-do list** is a tool that helps you to organize your day. It simply lists the things that you need to do and allows you to mark them as complete.
+> It was built as an introduction to web dev using ES6 and Webpack
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
+- Webpack
+- JavaScript ES6
+- HTML5
+- CSS3
 
-## Live Demo (if available)
+## Milestones
 
-[Live Demo Link](https://livedemo.com)
+- Milestone 1: **list structure**
 
-
-## Getting Started
-
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
+- Coming soon
 
 ## About me
 
@@ -47,11 +27,6 @@ To get a local copy up and running follow these simple example steps.
 - LinkedIn: [LinkedIn](https://linkedin.com/in/sboursen)
 
 ## Contributors
-
-> Kudos to these wonderful
-> people who brought my attention
-> to multiple issue with
-> this project 🙏🙏🙏
 
 Contributions, issues, and feature requests are welcome!
 Feel free to check the [issues page](../../issues/).
@@ -66,13 +41,6 @@ Give a ⭐️ if you like this project!
 - Inspiration
 - etc
 
-## Acknowledgements
-
-- [link1]()
-- [link2]()
-- [link3]()
-
 ## 📝 License
 
-This project is [MIT](./LICENSE.md) licensed.
-
+This project is [MIT](./MIT.md) licensed.
