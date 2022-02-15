@@ -23,7 +23,7 @@ const toDoTasks = [
   },
 ];
 
-const toDoList = document.querySelector('to-do-list');
+const toDoList = document.querySelector('.to-do-list');
 const displayTasks = (e) => {
   if (e.currentTarget.classList.contains('to-do-list')) {
     toDoTasks.forEach((task) => {
@@ -31,4 +31,4 @@ const displayTasks = (e) => {
     });
   }
 };
-toDoList.addEventListener('DOMContentLoaded', displayTasks);
+window.addEventListener('DOMContentLoaded', displayTasks);
