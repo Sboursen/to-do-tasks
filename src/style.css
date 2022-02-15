@@ -3,12 +3,23 @@
 /* =========Style reset=========== */
 
 /* =============================== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+@font-face {
+  font-family: NierFont;
+  src:
+    url("./font/nier.woff2") format("woff2"),
+    url("./font/nier.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
 
 :root {
-  --bg-color-body: #f6f6f6;
-  --bg-color-button: #f6f6f6;
+  --bg-color-body: #d1cdb7;
+  --bg-color-button: bab5a1;
   --bg-color-list: #fff;
   --color-title: #434346;
+  --bg-color-active: #454138;
 }
 
 * {
@@ -25,11 +36,23 @@ body {
   padding: 0;
   width: 100%;
   height: 100vh;
-  background-color: var(--bg-color-body);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: Inter, sans-serif;
+  background-color: var(--bg-color-body);
+  opacity: 0.8;
+  background-image:
+    linear-gradient(
+      #ccc8b1 1px,
+      transparent 1px
+    ),
+    linear-gradient(to right, #ccc8b1 1px, #d1cdb7 1px);
+  background-size: 6px 6px;
+  box-shadow:
+    rgb(50 50 93 / 25%) 0 20px 40px -12px inset,
+    rgb(0 0 0 / 30%) 0 18px 18px -18px inset;
 }
 
 a,
@@ -75,8 +98,9 @@ main {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 48px 48px auto 64px;
-  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+  box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
   background-color: var(--bg-color-list);
+  border-radius: 6px;
 }
 
 .title-section {
@@ -86,12 +110,15 @@ main {
   align-items: center;
   padding: 12px;
   color: var(--color-title);
+  border-bottom: 1px solid lightgrey;
 }
 
 .title-section h1 {
   text-align: left;
-  font-size: 16px;
+  font-family: NierFont, sans-serif;
+  font-size: 24px;
   font-weight: 700;
+  text-shadow: 2px 2px 0 #bab5a1;
 }
 
 .title-section .icon {
@@ -108,15 +135,23 @@ main {
 
 .input-section input {
   text-align: left;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 400;
   height: 100%;
   width: 100%;
   border-left: none;
   border-right: none;
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
-  padding: 6px 24px 6px 12px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  padding: 6px 32px 6px 12px;
+}
+
+input:focus {
+  outline: none;
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid var(--bg-color-active);
+  border-bottom: 1px solid var(--bg-color-active);
 }
 
 .input-section .icon {
@@ -139,7 +174,7 @@ main {
   height: 48px;
   display: grid;
   grid-template-columns: 48px auto 48px;
-  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
   align-items: center;
 }
 
@@ -147,6 +182,8 @@ main {
   display: block;
   align-self: center;
   justify-self: center;
+  height: 30%;
+  width: 30%;
 }
 
 .task .icon {
@@ -156,5 +193,35 @@ main {
 }
 
 .clear-button {
-  background-color: var(--bg-color-button);
+  position: relative;
+  font-size: 18px;
+  font-weight: 500;
+  background:
+    linear-gradient(
+      to left,
+      var(--bg-color-list) 50%,
+      var(--bg-color-active) 50%
+    );
+  background-size: 200% 100%;
+  background-position: right center;
+  border-top: 1px solid lightgrey;
+}
+
+.clear-button::before {
+  position: absolute;
+  width: 100%;
+  height: 80%;
+  top: 5%;
+  left: 0;
+  border-top: 3px solid var(--bg-color-list);
+  border-bottom: 3px solid var(--bg-color-list);
+  content: "";
+}
+
+.clear-button:hover {
+  color: var(--bg-color-list);
+  background-position: left center;
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition-duration: 200ms;
 }
