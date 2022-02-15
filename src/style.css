@@ -75,7 +75,7 @@ main {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 48px 48px auto 64px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
   background-color: var(--bg-color-list);
 }
 
