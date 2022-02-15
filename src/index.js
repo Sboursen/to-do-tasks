@@ -1,13 +1,52 @@
-import _ from 'lodash';
 import './style.css';
 
-function component() {
-  const element = document.createElement('div');
+const toDoTasks = [
+  {
+    description: 'Play guitar',
+    completed: false,
+    index: 2,
+  },
+  {
+    description: 'Eat ice cream',
+    completed: false,
+    index: 1,
+  },
+  {
+    description: 'Watch a movie',
+    completed: false,
+    index: 0,
+  },
+  {
+    description: 'Hangout with friends',
+    completed: false,
+    index: 3,
+  },
+];
 
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+const toDoList = document.querySelector('.to-do-list');
+toDoList.style.gridTemplateRows = `repeat(${
+  Object.keys(toDoTasks).length
+}, 48px);`;
 
-  return element;
-}
+const displayTasks = () => {
+  toDoTasks
+    .sort((obj1, obj2) => obj1.index - obj2.index)
+    .forEach((task) => {
+      const li = `<li class="task">
+                <input type="checkbox" name="check-${
+  task.index
+}" id="${task.index}" ${
+  task.completed ? 'checked' : null
+}>
+                <span class="description">${
+  task.description
+}</span>
+                <button type="button" class="icon">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </li>`;
 
-document.body.appendChild(component());
+      toDoList.innerHTML += `\n ${li}`;
+    });
+};
+window.addEventListener('DOMContentLoaded', displayTasks);

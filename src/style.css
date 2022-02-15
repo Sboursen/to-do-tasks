@@ -1,3 +1,160 @@
+/* =============================== */
+
+/* =========Style reset=========== */
+
+/* =============================== */
+
+:root {
+  --bg-color-body: #f6f6f6;
+  --bg-color-button: #f6f6f6;
+  --bg-color-list: #fff;
+  --color-title: #434346;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: blue;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-color-body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  font-weight: normal;
+  color: var(--shark);
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+}
+
+/* =============================== */
+
+/* =========Card styling========== */
+
+/* =============================== */
+
+main {
+  width: 500px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 48px 48px auto 64px;
+  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+  background-color: var(--bg-color-list);
+}
+
+.title-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  color: var(--color-title);
+}
+
+.title-section h1 {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.title-section .icon {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px;
+}
+
+.input-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.input-section input {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  height: 100%;
+  width: 100%;
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  padding: 6px 24px 6px 12px;
+}
+
+.input-section .icon {
+  position: absolute;
+  right: 12px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  height: 100%;
+  padding: 6px;
+  z-index: 2;
+}
+
+.to-do-list {
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+.task {
+  height: 48px;
+  display: grid;
+  grid-template-columns: 48px auto 48px;
+  border-bottom: 1px solid lightgrey;
+  align-items: center;
+}
+
+.task input {
+  display: block;
+  align-self: center;
+  justify-self: center;
+}
+
+.task .icon {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px;
+}
+
+.clear-button {
+  background-color: var(--bg-color-button);
 }
