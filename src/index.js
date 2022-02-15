@@ -24,11 +24,20 @@ const toDoTasks = [
 ];
 
 const toDoList = document.querySelector('.to-do-list');
-const displayTasks = (e) => {
-  if (e.currentTarget.classList.contains('to-do-list')) {
-    toDoTasks.forEach((task) => {
-      console.log(task);
-    });
-  }
+const displayTasks = () => {
+  toDoTasks.forEach((task) => {
+    let li = `<li class="task">
+                <input type="checkbox" name="check-${
+                  task.index
+                }" id="${task.index}" ${
+      task.completed ? 'checked' : null
+    }>
+                <span class="description">${
+                  task.description
+                }</span>
+              </li>`;
+
+    toDoList.innerHTML += `\n ${li}`;
+  });
 };
 window.addEventListener('DOMContentLoaded', displayTasks);
