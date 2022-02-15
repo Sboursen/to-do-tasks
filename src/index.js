@@ -24,6 +24,10 @@ const toDoTasks = [
 ];
 
 const toDoList = document.querySelector('.to-do-list');
+toDoList.style.gridTemplateRows = `repeat(${
+  Object.keys(toDoTasks).length
+}, 48px);`;
+console.log(Object.keys(toDoTasks).length);
 const displayTasks = () => {
   toDoTasks.forEach((task) => {
     let li = `<li class="task">
@@ -35,6 +39,9 @@ const displayTasks = () => {
                 <span class="description">${
                   task.description
                 }</span>
+                <button type="button" class="icon">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
               </li>`;
 
     toDoList.innerHTML += `\n ${li}`;
