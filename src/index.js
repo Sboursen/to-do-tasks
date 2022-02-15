@@ -4,7 +4,7 @@ const toDoTasks = [
   {
     description: 'Play guitar',
     completed: false,
-    index: 0,
+    index: 2,
   },
   {
     description: 'Eat ice cream',
@@ -14,7 +14,7 @@ const toDoTasks = [
   {
     description: 'Watch a movie',
     completed: false,
-    index: 2,
+    index: 0,
   },
   {
     description: 'Hangout with friends',
@@ -29,8 +29,10 @@ toDoList.style.gridTemplateRows = `repeat(${
 }, 48px);`;
 
 const displayTasks = () => {
-  toDoTasks.forEach((task) => {
-    const li = `<li class="task">
+  toDoTasks
+    .sort((obj1, obj2) => obj1.index - obj2.index)
+    .forEach((task) => {
+      const li = `<li class="task">
                 <input type="checkbox" name="check-${
   task.index
 }" id="${task.index}" ${
@@ -44,7 +46,7 @@ const displayTasks = () => {
                 </button>
               </li>`;
 
-    toDoList.innerHTML += `\n ${li}`;
-  });
+      toDoList.innerHTML += `\n ${li}`;
+    });
 };
 window.addEventListener('DOMContentLoaded', displayTasks);
