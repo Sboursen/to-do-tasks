@@ -59,7 +59,23 @@ export default class CRUD {
   };
 
   doOnDeleteButtonClicked = (e) => {
-    console.log('inside DoOnDeleteButtonClicked');
+    const button = e.currentTarget;
+    if (button.id.split('-')[0] === 'deleteButton') {
+      const id = button.id.split('-')[1];
+      const remainingTasks = this.storageManagement
+        .readLocalStorage()
+        .filter((task) => task.index !== +id);
+      console.log(
+        this.storageManagement
+          .readLocalStorage()
+          .filter((task) => task.index !== +id),
+        id,
+      );
+      this.storageManagement.updateLocalStorage(
+        remainingTasks,
+      );
+      this.displayUpdatedList();
+    }
   };
 
   addEventsToDynamicElements = () => {

@@ -217,6 +217,7 @@ main {
   height: 40%;
   width: 40%;
   margin: 25% 30%;
+  transition: z-index 0.7s step-end;
 }
 
 .task .move-button {
@@ -228,6 +229,7 @@ main {
   height: 40%;
   width: 40%;
   margin: 25% 35%;
+  transition: z-index 0.7s step-end;
 }
 
 .clear-button {
