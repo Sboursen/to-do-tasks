@@ -3,6 +3,7 @@ import LocalStorage from './local-storage';
 import Task from './task';
 import createTaskElement, {
   allocateSpaceForToDOList,
+  getCheckedTaskElementId,
 } from './task-element-utils';
 
 export default class CRUD {
@@ -17,6 +18,11 @@ export default class CRUD {
     this.addButton.addEventListener(
       'click',
       this.onAddButtonClicked,
+    );
+
+    this.clearButton.addEventListener(
+      'click',
+      this.onClearButtonClicked,
     );
   }
 
@@ -56,5 +62,57 @@ export default class CRUD {
   onAddButtonClicked = () => {
     this.addNewTaskToList(this.createNewTask());
     this.clearTaskInput();
+  };
+
+  getToBeDeletedTaskList = () => {
+    const checkedTasksIds = [];
+    const taskElements = [].slice.call(
+      this.listElement.children,
+    );
+
+    taskElements.forEach((taskElement) => {
+      const id = getCheckedTaskElementId(taskElement);
+      if (id >= 0) {
+        checkedTasksIds.push(id);
+      }
+    });
+    return checkedTasksIds;
+  };
+
+  clearList = () => {
+    this.listElement.innerHTML = '';
+  };
+
+  displayUpdatedList = () => {
+    this.clearList();
+    this.initializeApplication();
+  };
+
+  getRemainingTasks = (checkedTasksIds) =>
+    this.storageManagement
+      .readLocalStorage()
+      .filter((t, i) => !checkedTasksIds.includes(i));
+
+  updateIndices = (remainingTasks) => {
+    remainingTasks.forEach((task, index) => {
+      task.index = index;
+    });
+    return remainingTasks;
+  };
+
+  removeTaskFromList = (checkedTasksIds) => {
+    const remainingTasks =
+      this.getRemainingTasks(checkedTasksIds);
+    const updatedRemainingTasks =
+      this.updateIndices(remainingTasks);
+    this.storageManagement.updateLocalStorage(
+      updatedRemainingTasks,
+    );
+    this.displayUpdatedList();
+  };
+
+  onClearButtonClicked = () => {
+    const checkedTasksIds = this.getToBeDeletedTaskList();
+    this.removeTaskFromList(checkedTasksIds);
   };
 }

@@ -1,3 +1,11 @@
+export function getCheckedTaskElementId(taskElement) {
+  let res = -1;
+  if (taskElement.children[0].checked === true) {
+    res = Number(taskElement.id.split('-')[1]);
+  }
+  return res;
+}
+
 function onCheckboxToggle(e) {
   const checkbox = e.currentTarget;
   const description = checkbox.parentNode.children[1];
