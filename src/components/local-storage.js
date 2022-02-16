@@ -5,19 +5,29 @@ export default class LocalStorage {
 
   initializeLocalStorage = () => {
     if (!localStorage.getItem('toDoTasks')) {
-      localStorage.setItem('toDoTasks', this.toDoTasks);
+      localStorage.setItem(
+        'toDoTasks',
+        JSON.stringify(this.toDoTasks),
+      );
     } else {
-      this.toDoTasks = localStorage.getItem('toDoTasks');
+      this.toDoTasks = JSON.parse(
+        localStorage.getItem('toDoTasks'),
+      );;
     }
   };
 
   updateLocalStorage = (toDoTasks) => {
     this.toDoTasks = toDoTasks;
-    localStorage.setItem('toDoTasks', this.toDoTasks);
+    localStorage.setItem(
+      'toDoTasks',
+      JSON.stringify(this.toDoTasks),
+    );
   };
 
   readLocalStorage = () => {
-    this.toDoTasks = localStorage.getItem('toDoTasks');
+    this.toDoTasks = JSON.parse(
+      localStorage.getItem('toDoTasks'),
+    );
     return this.toDoTasks;
   };
 }
