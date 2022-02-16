@@ -20,3 +20,9 @@ export default function createTaskElement(task) {
   tmpWrapper.innerHTML = taskStringElement.trim();
   return tmpWrapper.firstElementChild;
 }
+
+export function allocateSpaceForToDOList(toDoList) {
+  toDoList.style.gridTemplateRows = `repeat(${
+    Object.keys(dom.toDoTasks).length
+  }, 48px);`;
+}

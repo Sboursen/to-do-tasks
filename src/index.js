@@ -1,7 +1,9 @@
 import './style.css';
-import initializeApplication from './components/crud-operations';
+import CRUD from './components/crud-operations';
+
+const crud = new CRUD();
 
 window.addEventListener(
   'DOMContentLoaded',
-  initializeApplication,
+  crud.initializeApplication,
 );

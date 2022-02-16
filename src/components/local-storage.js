@@ -5,6 +5,7 @@ export default class LocalStorage {
 
   initializeLocalStorage = () => {
     if (!localStorage.getItem('toDoTasks')) {
+      this.toDoTasks = [];
       localStorage.setItem(
         'toDoTasks',
         JSON.stringify(this.toDoTasks),
@@ -18,6 +19,14 @@ export default class LocalStorage {
 
   updateLocalStorage = (toDoTasks) => {
     this.toDoTasks = toDoTasks;
+    localStorage.setItem(
+      'toDoTasks',
+      JSON.stringify(this.toDoTasks),
+    );
+  };
+
+  addToLocalStorage = (task) => {
+    this.toDoTasks.push(task);
     localStorage.setItem(
       'toDoTasks',
       JSON.stringify(this.toDoTasks),
