@@ -33,6 +33,15 @@ export default class LocalStorage {
     );
   };
 
+  changeTaskStatus = (task, status) => {
+    this.toDoTasks[task.index].completed = status;
+    console.log(this.toDoTasks[task.index].completed);
+    localStorage.setItem(
+      'toDoTasks',
+      JSON.stringify(this.toDoTasks),
+    );
+  };
+
   readLocalStorage = () => {
     this.toDoTasks = JSON.parse(
       localStorage.getItem('toDoTasks'),

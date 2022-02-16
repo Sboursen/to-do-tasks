@@ -13,6 +13,18 @@ export default class CRUD {
     this.clearButton = dom.clearButton;
     this.newTaskInput = dom.newTaskInput;
     this.addButton = dom.addButton;
+    this.checkBoxes = document.querySelectorAll(
+      'li input[type="checkbox"]',
+    );
+    this.descriptionInputs = document.querySelectorAll(
+      'li input[type="text"]',
+    );
+    this.deleteButtons = document.querySelectorAll(
+      'li button.delete-button',
+    );
+    this.moveButtons = document.querySelectorAll(
+      'li button.move-button',
+    );
 
     // event listeners
     this.addButton.addEventListener(
@@ -25,6 +37,58 @@ export default class CRUD {
       this.onClearButtonClicked,
     );
   }
+
+  doOnCheckboxChecked = (e) => {
+    const id = e.target.id.split('-')[1];
+    const task =
+      this.storageManagement.readLocalStorage()[id];
+    this.storageManagement.changeTaskStatus(
+      task,
+      e.target.checked,
+    );
+  };
+
+  doOnDescriptionInputChanged = (e) => {
+    console.log('inside doOnDescriptionInputChanged');
+  };
+
+  doOnDeleteButtonClicked = (e) => {
+    console.log('inside DoOnDeleteButtonClicked');
+  };
+
+  addEventsToDynamicElements = () => {
+    this.checkBoxes = document.querySelectorAll(
+      'li input[type="checkbox"]',
+    );
+    this.descriptionInputs = document.querySelectorAll(
+      'li input[type="text"]',
+    );
+    this.deleteButtons = document.querySelectorAll(
+      'li button.delete-button',
+    );
+    this.moveButtons = document.querySelectorAll(
+      'li button.move-button',
+    );
+
+    this.checkBoxes.forEach((checkbox) =>
+      checkbox.addEventListener(
+        'click',
+        this.doOnCheckboxChecked,
+      ),
+    );
+    this.descriptionInputs.forEach((input) =>
+      input.addEventListener(
+        'input',
+        this.doOnDescriptionInputChanged,
+      ),
+    );
+    this.deleteButtons.forEach((button) =>
+      button.addEventListener(
+        'click',
+        this.doOnDeleteButtonClicked,
+      ),
+    );
+  };
 
   sortTasks = (toDoTasks) =>
     toDoTasks.sort((obj1, obj2) => obj1.index - obj2.index);
@@ -40,6 +104,7 @@ export default class CRUD {
       const taskElement = createTaskElement(task);
       this.listElement.appendChild(taskElement);
     });
+    this.addEventsToDynamicElements();
   };
 
   addNewTaskToList = (task) => {

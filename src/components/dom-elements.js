@@ -7,3 +7,4 @@ export const newTaskInput =
 export const addButton = document.querySelector(
   '#add-task-button',
 );
+
