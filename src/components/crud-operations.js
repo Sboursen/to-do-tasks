@@ -113,9 +113,37 @@ export default class CRUD {
     this.addEventsToDynamicElements();
   };
 
+  addEventsToTaskElement = (newTask) => {
+    const checkbox = newTask.querySelector(
+      'input[type="checkbox"]',
+    );
+    const input = newTask.querySelector(
+      'input[type="text"]',
+    );
+    const button = newTask.querySelector(
+      'button.delete-button',
+    );
+
+    checkbox.addEventListener(
+      'click',
+      this.doOnCheckboxChecked,
+    );
+
+    input.addEventListener(
+      'input',
+      this.doOnDescriptionInputChanged,
+    );
+
+    button.addEventListener(
+      'click',
+      this.doOnDeleteButtonClicked,
+    );
+  };
+
   addNewTaskToList = (task) => {
     this.storageManagement.addToLocalStorage(task);
     const newTask = createTaskElement(task);
+    this.addEventsToTaskElement(newTask);
     this.listElement.appendChild(newTask);
   };
 
