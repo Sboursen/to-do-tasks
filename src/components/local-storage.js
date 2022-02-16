@@ -12,7 +12,7 @@ export default class LocalStorage {
     } else {
       this.toDoTasks = JSON.parse(
         localStorage.getItem('toDoTasks'),
-      );;
+      );
     }
   };
 
