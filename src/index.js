@@ -1,4 +1,8 @@
 import './style.css';
+import Task from './components/task';
+
+let myTask = new Task('Play guitar', false, 67);
+
 
 const toDoTasks = [
   {
@@ -34,13 +38,13 @@ const displayTasks = () => {
     .forEach((task) => {
       const li = `<li class="task">
                 <input type="checkbox" name="check-${
-  task.index
-}" id="${task.index}" ${
-  task.completed ? 'checked' : null
-}>
+                  task.index
+                }" id="${task.index}" ${
+        task.completed ? 'checked' : null
+      }>
                 <span class="description">${
-  task.description
-}</span>
+                  task.description
+                }</span>
                 <button type="button" class="icon">
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
