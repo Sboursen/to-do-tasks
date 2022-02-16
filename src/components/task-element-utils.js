@@ -56,14 +56,6 @@ function onDescriptionInputBlured(e) {
 }
 
 function addInputFocusEvent(taskElement) {
-  const moveButton = taskElement.querySelector(
-    'button.move-button',
-  );
-
-  const deleteButton = taskElement.querySelector(
-    'button.delete-button',
-  );
-
   const descriptionInput = taskElement.querySelector(
     'label.description > input',
   );
@@ -85,23 +77,23 @@ export default function createTaskElement(task) {
     task.index
   }">
         <input type="checkbox" name="check-${
-          task.index
-        }" id="check-${task.index}" ${
-    task.completed ? 'checked' : null
-  }>
+  task.index
+}" id="check-${task.index}" ${
+  task.completed ? 'checked' : null
+}>
         <label for="description" class="description">
           <input type="text" name="description" value="${
-            task.description
-          }" id="description-${task.index}">
+  task.description
+}" id="description-${task.index}">
         </label>
         <button type="button" class="icon move-button" id="moveButton-${
-          task.index
-        }">
+  task.index
+}">
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <button type="button" class="icon delete-button" id="deleteButton-${
-          task.index
-        }">
+  task.index
+}">
           <i class="fas fa-trash-alt"></i>
         </button>
       </li>`;
@@ -119,4 +111,3 @@ export function allocateSpaceForToDOList(toDoList) {
     Object.keys(toDoList).length
   }, 48px);`;
 }
-
