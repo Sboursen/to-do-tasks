@@ -18,6 +18,7 @@
   --bg-color-button: bab5a1;
   --bg-color-list: #fff;
   --color-title: #434346;
+  --color-warning: #d25d47;
   --bg-color-active: #454138;
 }
 
@@ -213,6 +214,9 @@ main {
   top: 0;
   left: 0;
   z-index: -1;
+  height: 40%;
+  width: 40%;
+  margin: 25% 30%;
 }
 
 .task .move-button {
@@ -221,6 +225,9 @@ main {
   top: 0;
   left: 0;
   z-index: 1;
+  height: 40%;
+  width: 40%;
+  margin: 25% 35%;
 }
 
 .clear-button {
@@ -262,4 +269,8 @@ main {
   border-right: none;
   border-top: 1px solid var(--bg-color-active);
   border-bottom: 1px solid var(--bg-color-active);
+}
+
+.task .delete-button:hover {
+  color: var(--color-warning);
 }
