@@ -7,45 +7,50 @@ export default class CRUD {
   constructor() {
     this.storageManagement = new LocalStorage();
     this.listElement = dom.toDoList;
-  }
+    this.clearButton = dom.clearButton;
+    this.newTaskInput = dom.newTaskInput;
+    this.addButton = dom.addButton;
 
-  sortTasks = () => {
-    this.storageManagement.toDoTasks.sort(
-      (obj1, obj2) => obj1.index - obj2.index,
+    // event listeners
+    this.addButton.addEventListener(
+      'click',
+      this.onAddButtonClicked,
     );
   }
 
+  sortTasks = (toDoTasks) =>
+    toDoTasks.sort((obj1, obj2) => obj1.index - obj2.index);
+
   initializeApplication = () => {
     this.storageManagement.initializeLocalStorage();
-    this.storageManagement
-      .readLocalStorage()
-      .sortTasks().forEach((task) => {
-        const taskElement = createTaskElement(task);
-        this.listElement.appendChild(taskElement);
-      });
+    const toDoTasks =
+      this.storageManagement.readLocalStorage();
+
+    this.sortTasks(toDoTasks).forEach((task) => {
+      const taskElement = createTaskElement(task);
+      this.listElement.appendChild(taskElement);
+    });
+  };
+
+  addNewTaskToList = (task) => {
+    this.storageManagement.addToLocalStorage(task);
+    const newTask = createTaskElement(task);
+    this.listElement.appendChild(newTask);
+  };
+
+  createNewTask = () => {
+    const description = this.newTaskInput.value;
+    const index = this.storageManagement.toDoTasks.length;
+    const newTask = new Task(index, description);
+    return newTask;
+  };
+
+  clearTaskInput = () => {
+    this.newTaskInput.value = '';
+  };
+
+  onAddButtonClicked = (e) => {
+    this.addNewTaskToList(this.createNewTask());
+    this.clearTaskInput();
   };
 }
-
-
-
-// export default function initializeApplication() {
-//   toDoTasks
-//     .sort((obj1, obj2) => obj1.index - obj2.index)
-//     .forEach((task) => {
-//       const li = `<li class="task">
-//                 <input type="checkbox" name="check-${
-//                   task.index
-//                 }" id="${task.index}" ${
-//         task.completed ? 'checked' : null
-//       }>
-//                 <span class="description">${
-//                   task.description
-//                 }</span>
-//                 <button type="button" class="icon">
-//                   <i class="fa-solid fa-ellipsis-vertical"></i>
-//                 </button>
-//               </li>`;
-
-//       dom.toDoList.innerHTML += `\n ${li}`;
-//     });
-// }
