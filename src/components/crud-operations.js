@@ -49,7 +49,13 @@ export default class CRUD {
   };
 
   doOnDescriptionInputChanged = (e) => {
-    console.log('inside doOnDescriptionInputChanged');
+    const id = e.target.id.split('-')[1];
+    const task =
+      this.storageManagement.readLocalStorage()[id];
+    this.storageManagement.changeTaskDescription(
+      task,
+      e.target.value,
+    );
   };
 
   doOnDeleteButtonClicked = (e) => {

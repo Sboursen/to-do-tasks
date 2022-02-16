@@ -35,7 +35,14 @@ export default class LocalStorage {
 
   changeTaskStatus = (task, status) => {
     this.toDoTasks[task.index].completed = status;
-    console.log(this.toDoTasks[task.index].completed);
+    localStorage.setItem(
+      'toDoTasks',
+      JSON.stringify(this.toDoTasks),
+    );
+  };
+
+  changeTaskDescription = (task, description) => {
+    this.toDoTasks[task.index].description = description;
     localStorage.setItem(
       'toDoTasks',
       JSON.stringify(this.toDoTasks),

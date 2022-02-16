@@ -20,6 +20,12 @@ function addCheckEvent(taskElement) {
   const checkbox = taskElement.querySelector(
     'input[type="checkbox"]',
   );
+  const description = checkbox.parentNode.children[1];
+  if (checkbox.checked) {
+    description.style.textDecoration = 'line-through';
+  } else {
+    description.style.textDecoration = 'none';
+  }
   checkbox.addEventListener('click', onCheckboxToggle);
 }
 
