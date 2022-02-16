@@ -1,7 +1,9 @@
 import * as dom from './dom-elements';
 import LocalStorage from './local-storage';
 import Task from './task';
-import createTaskElement from './task-element-utils';
+import createTaskElement, {
+  allocateSpaceForToDOList,
+} from './task-element-utils';
 
 export default class CRUD {
   constructor() {
@@ -26,6 +28,8 @@ export default class CRUD {
     const toDoTasks =
       this.storageManagement.readLocalStorage();
 
+    allocateSpaceForToDOList(this.listElement);
+
     this.sortTasks(toDoTasks).forEach((task) => {
       const taskElement = createTaskElement(task);
       this.listElement.appendChild(taskElement);
@@ -49,7 +53,7 @@ export default class CRUD {
     this.newTaskInput.value = '';
   };
 
-  onAddButtonClicked = (e) => {
+  onAddButtonClicked = () => {
     this.addNewTaskToList(this.createNewTask());
     this.clearTaskInput();
   };
