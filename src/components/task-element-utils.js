@@ -28,20 +28,27 @@ export default function createTaskElement(task) {
   const taskStringElement = `<li class="task" id="task-${
     task.index
   }">
-                <input type="checkbox" name="check-${
-                  task.index
-                }" id="check-${task.index}" ${
+        <input type="checkbox" name="check-${
+          task.index
+        }" id="check-${task.index}" ${
     task.completed ? 'checked' : null
   }>
-                <span class="description" id="description-${
-                  task.index
-                }">${task.description}</span>
-                <button type="button" class="icon" id="button-${
-                  task.index
-                }">
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </button>
-              </li>`;
+        <label for="description" class="description">
+          <input type="text" name="description" value="${
+            task.description
+          }" id="description-${task.index}" readonly>
+        </label>
+        <button type="button" class="icon move-button" id="moveButton-${
+          task.index
+        }">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <button type="button" class="icon delete-button" id="deleteButton-${
+          task.index
+        }">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </li>`;
   tmpWrapper.innerHTML = taskStringElement.trim();
 
   const taskElement = tmpWrapper.firstElementChild;

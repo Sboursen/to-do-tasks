@@ -19,7 +19,6 @@ export default class LocalStorage {
 
   updateLocalStorage = (toDoTasks) => {
     this.toDoTasks = toDoTasks;
-
     localStorage.setItem(
       'toDoTasks',
       JSON.stringify(this.toDoTasks),
