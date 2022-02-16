@@ -23,6 +23,56 @@ function addCheckEvent(taskElement) {
   checkbox.addEventListener('click', onCheckboxToggle);
 }
 
+function onDescriptionInputFocused(e) {
+  const taskElement = e.target.parentNode.parentNode;
+  const moveButton = taskElement.querySelector(
+    'button.move-button',
+  );
+  const deleteButton = taskElement.querySelector(
+    'button.delete-button',
+  );
+  moveButton.style.zIndex = '-1';
+  deleteButton.style.zIndex = '1';
+  taskElement.style.backgroundColor = '#b99a7d';
+}
+
+function onDescriptionInputBlured(e) {
+  const taskElement = e.target.parentNode.parentNode;
+  const moveButton = taskElement.querySelector(
+    'button.move-button',
+  );
+  const deleteButton = taskElement.querySelector(
+    'button.delete-button',
+  );
+  moveButton.style.zIndex = '1';
+  deleteButton.style.zIndex = '-1';
+  taskElement.style.backgroundColor = 'transparent';
+}
+
+function addInputFocusEvent(taskElement) {
+  const moveButton = taskElement.querySelector(
+    'button.move-button',
+  );
+
+  const deleteButton = taskElement.querySelector(
+    'button.delete-button',
+  );
+
+  const descriptionInput = taskElement.querySelector(
+    'label.description > input',
+  );
+
+  descriptionInput.addEventListener(
+    'focus',
+    onDescriptionInputFocused,
+  );
+
+  descriptionInput.addEventListener(
+    'blur',
+    onDescriptionInputBlured,
+  );
+}
+
 export default function createTaskElement(task) {
   const tmpWrapper = document.createElement('div');
   const taskStringElement = `<li class="task" id="task-${
@@ -36,7 +86,7 @@ export default function createTaskElement(task) {
         <label for="description" class="description">
           <input type="text" name="description" value="${
             task.description
-          }" id="description-${task.index}" readonly>
+          }" id="description-${task.index}">
         </label>
         <button type="button" class="icon move-button" id="moveButton-${
           task.index
@@ -53,6 +103,7 @@ export default function createTaskElement(task) {
 
   const taskElement = tmpWrapper.firstElementChild;
   addCheckEvent(taskElement);
+  addInputFocusEvent(taskElement);
 
   return taskElement;
 }

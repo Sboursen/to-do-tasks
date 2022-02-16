@@ -191,6 +191,14 @@ main {
   font-weight: 400;
 }
 
+.task input[type='text']:focus {
+  display: block;
+  align-self: center;
+  justify-self: center;
+  border: 2px solid var(--bg-color-active);
+  background-color: var(--bg-color-body);
+}
+
 .task .icon {
   font-size: 12px;
   font-weight: 700;
@@ -204,7 +212,6 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: var(--bg-color-list);
   z-index: -1;
 }
 
@@ -213,7 +220,6 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: var(--bg-color-list);
   z-index: 1;
 }
 
