@@ -40,8 +40,7 @@ export default class CRUD {
 
   doOnCheckboxChecked = (e) => {
     const id = e.target.id.split('-')[1];
-    const task =
-      this.storageManagement.readLocalStorage()[id];
+    const task = this.storageManagement.readLocalStorage()[id];
     this.storageManagement.changeTaskStatus(
       task,
       e.target.checked,
@@ -50,8 +49,7 @@ export default class CRUD {
 
   doOnDescriptionInputChanged = (e) => {
     const id = e.target.id.split('-')[1];
-    const task =
-      this.storageManagement.readLocalStorage()[id];
+    const task = this.storageManagement.readLocalStorage()[id];
     this.storageManagement.changeTaskDescription(
       task,
       e.target.value,
@@ -65,8 +63,7 @@ export default class CRUD {
       let remainingTasks = this.storageManagement
         .readLocalStorage()
         .filter((task) => task.index !== +id);
-      remainingTasks =
-        this.storageManagement.resetIndices(remainingTasks);
+      remainingTasks = this.storageManagement.resetIndices(remainingTasks);
       this.storageManagement.updateLocalStorage(
         remainingTasks,
       );
@@ -88,33 +85,25 @@ export default class CRUD {
       'li button.move-button',
     );
 
-    this.checkBoxes.forEach((checkbox) =>
-      checkbox.addEventListener(
-        'click',
-        this.doOnCheckboxChecked,
-      ),
-    );
-    this.descriptionInputs.forEach((input) =>
-      input.addEventListener(
-        'input',
-        this.doOnDescriptionInputChanged,
-      ),
-    );
-    this.deleteButtons.forEach((button) =>
-      button.addEventListener(
-        'click',
-        this.doOnDeleteButtonClicked,
-      ),
-    );
+    this.checkBoxes.forEach((checkbox) => checkbox.addEventListener(
+      'click',
+      this.doOnCheckboxChecked,
+    ));
+    this.descriptionInputs.forEach((input) => input.addEventListener(
+      'input',
+      this.doOnDescriptionInputChanged,
+    ));
+    this.deleteButtons.forEach((button) => button.addEventListener(
+      'click',
+      this.doOnDeleteButtonClicked,
+    ));
   };
 
-  sortTasks = (toDoTasks) =>
-    toDoTasks.sort((obj1, obj2) => obj1.index - obj2.index);
+  sortTasks = (toDoTasks) => toDoTasks.sort((obj1, obj2) => obj1.index - obj2.index);
 
   initializeApplication = () => {
     this.storageManagement.initializeLocalStorage();
-    const toDoTasks =
-      this.storageManagement.readLocalStorage();
+    const toDoTasks = this.storageManagement.readLocalStorage();
 
     allocateSpaceForToDOList(this.listElement);
 
@@ -199,10 +188,9 @@ export default class CRUD {
     this.initializeApplication();
   };
 
-  getRemainingTasks = (checkedTasksIds) =>
-    this.storageManagement
-      .readLocalStorage()
-      .filter((t, i) => !checkedTasksIds.includes(i));
+  getRemainingTasks = (checkedTasksIds) => this.storageManagement
+    .readLocalStorage()
+    .filter((t, i) => !checkedTasksIds.includes(i));
 
   updateIndices = (remainingTasks) => {
     remainingTasks.forEach((task, index) => {
@@ -212,10 +200,8 @@ export default class CRUD {
   };
 
   removeTaskFromList = (checkedTasksIds) => {
-    const remainingTasks =
-      this.getRemainingTasks(checkedTasksIds);
-    const updatedRemainingTasks =
-      this.updateIndices(remainingTasks);
+    const remainingTasks = this.getRemainingTasks(checkedTasksIds);
+    const updatedRemainingTasks = this.updateIndices(remainingTasks);
     this.storageManagement.updateLocalStorage(
       updatedRemainingTasks,
     );

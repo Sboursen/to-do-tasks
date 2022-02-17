@@ -17,11 +17,10 @@ export default class LocalStorage {
     }
   };
 
-  resetIndices = (modifiedToDoTasks) =>
-    modifiedToDoTasks.map((task, order) => {
-      task.index = order;
-      return task;
-    });
+  resetIndices = (modifiedToDoTasks) => modifiedToDoTasks.map((task, order) => {
+    task.index = order;
+    return task;
+  });
 
   updateLocalStorage = (toDoTasks) => {
     this.toDoTasks = toDoTasks;
