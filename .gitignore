@@ -3,3 +3,6 @@ node_modules
 
 #design files
 src/design
+
+#dist folder
+dist
