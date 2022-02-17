@@ -4,7 +4,11 @@ import Task from './task';
 import createTaskElement, {
   allocateSpaceForToDOList,
   getCheckedTaskElementId,
+  enableClearButton,
+  toggleShake,
+  validateInputWithColor,
 } from './task-element-utils';
+import * as utils from './utils';
 
 export default class CRUD {
   constructor() {
@@ -68,6 +72,7 @@ export default class CRUD {
         remainingTasks,
       );
       this.displayUpdatedList();
+      enableClearButton();
     }
   };
 
@@ -99,15 +104,13 @@ export default class CRUD {
     ));
   };
 
-  sortTasks = (toDoTasks) => toDoTasks.sort((obj1, obj2) => obj1.index - obj2.index);
-
   initializeApplication = () => {
     this.storageManagement.initializeLocalStorage();
     const toDoTasks = this.storageManagement.readLocalStorage();
 
     allocateSpaceForToDOList(this.listElement);
 
-    this.sortTasks(toDoTasks).forEach((task) => {
+    utils.sortTasks(toDoTasks).forEach((task) => {
       const taskElement = createTaskElement(task);
       this.listElement.appendChild(taskElement);
     });
@@ -141,6 +144,26 @@ export default class CRUD {
     );
   };
 
+  isInputValid = (inputValue) => {
+    let result = true;
+    const existingTasksDescriptions = this.storageManagement
+      .readLocalStorage()
+      .map((td) => td.description);
+    if (utils.isEmpty(inputValue)) {
+      result = false;
+    } else if (!utils.isValid(inputValue)) {
+      result = false;
+    } else if (
+      utils.isDuplicate(
+        inputValue,
+        existingTasksDescriptions,
+      )
+    ) {
+      result = false;
+    }
+    return result;
+  };
+
   addNewTaskToList = (task) => {
     this.storageManagement.addToLocalStorage(task);
     const newTask = createTaskElement(task);
@@ -160,8 +183,14 @@ export default class CRUD {
   };
 
   onAddButtonClicked = () => {
-    this.addNewTaskToList(this.createNewTask());
-    this.clearTaskInput();
+    if (this.isInputValid(this.newTaskInput.value)) {
+      this.addNewTaskToList(this.createNewTask());
+      validateInputWithColor(this.newTaskInput, true);
+      this.clearTaskInput();
+    } else {
+      toggleShake(this.newTaskInput);
+      validateInputWithColor(this.newTaskInput, false);
+    }
   };
 
   getToBeDeletedTaskList = () => {
