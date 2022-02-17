@@ -146,6 +146,7 @@ main {
 .input-section .icon {
   position: absolute;
   right: 12px;
+  top: 0;
   text-align: left;
   font-size: 12px;
   font-weight: 600;
