@@ -3,12 +3,13 @@
 /* =========Style reset=========== */
 
 /* =============================== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
 @font-face {
   font-family: NierFont;
-  src: url('./font/nier.woff2') format('woff2'),
-    url('./font/nier.woff') format('woff');
+  src:
+    url("./font/nier.woff2") format("woff2"),
+    url("./font/nier.woff") format("woff");
   font-weight: 600;
   font-style: normal;
 }
@@ -42,13 +43,15 @@ body {
   font-family: Inter, sans-serif;
   background-color: var(--bg-color-body);
   opacity: 0.8;
-  background-image: linear-gradient(
+  background-image:
+    linear-gradient(
       #ccc8b1 1px,
       transparent 1px
     ),
     linear-gradient(to right, #ccc8b1 1px, #d1cdb7 1px);
   background-size: 6px 6px;
-  box-shadow: rgb(50 50 93 / 25%) 0 20px 40px -12px inset,
+  box-shadow:
+    rgb(50 50 93 / 25%) 0 20px 40px -12px inset,
     rgb(0 0 0 / 30%) 0 18px 18px -18px inset;
 }
 
@@ -170,7 +173,7 @@ main {
   align-items: center;
 }
 
-.task input[type='checkbox'] {
+.task input[type="checkbox"] {
   display: block;
   align-self: center;
   justify-self: center;
@@ -179,7 +182,7 @@ main {
   margin: 30%;
 }
 
-.task input[type='text'] {
+.task input[type="text"] {
   display: block;
   align-self: center;
   justify-self: center;
@@ -193,12 +196,37 @@ main {
   font-weight: 400;
 }
 
-.task input[type='text']:focus {
+.task input[type="text"]:focus {
   display: block;
   align-self: center;
   justify-self: center;
   border: 2px solid var(--bg-color-active);
   background-color: var(--bg-color-body);
+}
+
+.valid {
+  background-color: var(--bg-color-list);
+}
+
+.not-valid {
+  background-color: var(--color-warning);
+}
+
+input[type="text"].not-valid:focus {
+  background-color: var(--color-warning);
+}
+
+input[type="text"].valid:focus {
+  background-color: var(--bg-color-body);
+}
+
+.lost-focus-with-errors {
+  animation:
+    shake 0.82s
+    cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .task .icon {
@@ -231,11 +259,12 @@ main {
   position: relative;
   font-size: 18px;
   font-weight: 500;
-  background: linear-gradient(
-    to left,
-    var(--bg-color-list) 50%,
-    var(--bg-color-active) 50%
-  );
+  background:
+    linear-gradient(
+      to left,
+      var(--bg-color-list) 50%,
+      var(--bg-color-active) 50%
+    );
   background-size: 200% 100%;
   background-position: right center;
   border-top: 1px solid lightgrey;
@@ -249,10 +278,10 @@ main {
   left: 0;
   border-top: 3px solid var(--bg-color-list);
   border-bottom: 3px solid var(--bg-color-list);
-  content: '';
+  content: "";
 }
 
-.clear-button:hover {
+.clear-button:hover:enabled {
   color: var(--bg-color-list);
   background-position: left center;
   transition: all;
@@ -270,4 +299,27 @@ main {
 
 .task .delete-button:hover {
   color: var(--color-warning);
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
