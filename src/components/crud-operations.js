@@ -4,6 +4,9 @@ import Task from './task';
 import createTaskElement, {
   allocateSpaceForToDOList,
   getCheckedTaskElementId,
+  enableClearButton,
+  toggleShake,
+  validateInputWithColor,
 } from './task-element-utils';
 import * as utils from './utils';
 
@@ -72,6 +75,8 @@ export default class CRUD {
         remainingTasks,
       );
       this.displayUpdatedList();
+      enableClearButton();
+      console.log(dom.clearButton.disabled);
     }
   };
 
@@ -201,9 +206,11 @@ export default class CRUD {
   onAddButtonClicked = () => {
     if (this.isInputValid(this.newTaskInput.value)) {
       this.addNewTaskToList(this.createNewTask());
+      validateInputWithColor(this.newTaskInput, true);
       this.clearTaskInput();
     } else {
-      console.log('Input is not valid');
+      toggleShake(this.newTaskInput);
+      validateInputWithColor(this.newTaskInput, false);
     }
   };
 

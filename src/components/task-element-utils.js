@@ -1,9 +1,34 @@
+import * as utils from './utils';
+import { clearButton } from './dom-elements';
+
 export function getCheckedTaskElementId(taskElement) {
   let res = -1;
   if (taskElement.children[0].checked === true) {
     res = Number(taskElement.id.split('-')[1]);
   }
   return res;
+}
+
+export function toggleShake(element) {
+  element.classList.toggle('lost-focus-with-errors');
+}
+
+export function validateInputWithColor(element, isValid) {
+  if (isValid) {
+    element.classList.remove('not-valid');
+    element.classList.add('valid');
+  } else {
+    element.classList.remove('valid');
+    element.classList.add('not-valid');
+  }
+}
+
+export function enableClearButton() {
+  clearButton.disabled = false;
+}
+
+function disableClearButton() {
+  clearButton.disabled = true;
 }
 
 function onCheckboxToggle(e) {
@@ -43,6 +68,7 @@ function onDescriptionInputFocused(e) {
 }
 
 function onDescriptionInputBlured(e) {
+  const descriptionInput = e.target;
   const taskElement = e.target.parentNode.parentNode;
   const moveButton = taskElement.querySelector(
     'button.move-button',
@@ -53,9 +79,36 @@ function onDescriptionInputBlured(e) {
   moveButton.style.zIndex = '1';
   deleteButton.style.zIndex = '-1';
   taskElement.style.backgroundColor = 'transparent';
+
+  if (
+    utils.isEmpty(descriptionInput.value) ||
+    !utils.isValid(descriptionInput.value)
+  ) {
+    toggleShake(descriptionInput);
+    descriptionInput.focus();
+    disableClearButton();
+  } else {
+    enableClearButton();
+  }
 }
 
-function addInputFocusEvent(taskElement) {
+function onDescriptionInputChanged(e) {
+  const descriptionInput = e.target;
+  if (
+    utils.isEmpty(descriptionInput.value) ||
+    !utils.isValid(descriptionInput.value)
+  ) {
+    descriptionInput.classList.add('not-valid');
+    descriptionInput.classList.remove('valid');
+    disableClearButton();
+  } else {
+    descriptionInput.classList.remove('not-valid');
+    descriptionInput.classList.add('valid');
+    enableClearButton();
+  }
+}
+
+function addInputEvents(taskElement) {
   const descriptionInput = taskElement.querySelector(
     'label.description > input',
   );
@@ -69,6 +122,11 @@ function addInputFocusEvent(taskElement) {
     'blur',
     onDescriptionInputBlured,
   );
+
+  descriptionInput.addEventListener(
+    'input',
+    onDescriptionInputChanged,
+  );
 }
 
 export default function createTaskElement(task) {
@@ -77,23 +135,23 @@ export default function createTaskElement(task) {
     task.index
   }">
         <input type="checkbox" name="check-${
-  task.index
-}" id="check-${task.index}" ${
-  task.completed ? 'checked' : null
-}>
+          task.index
+        }" id="check-${task.index}" ${
+    task.completed ? 'checked' : null
+  }>
         <label for="description" class="description">
           <input type="text" name="description" value="${
-  task.description
-}" id="description-${task.index}">
+            task.description
+          }" id="description-${task.index}">
         </label>
         <button type="button" class="icon move-button" id="moveButton-${
-  task.index
-}">
+          task.index
+        }">
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <button type="button" class="icon delete-button" id="deleteButton-${
-  task.index
-}">
+          task.index
+        }">
           <i class="fas fa-trash-alt"></i>
         </button>
       </li>`;
@@ -101,8 +159,7 @@ export default function createTaskElement(task) {
 
   const taskElement = tmpWrapper.firstElementChild;
   addCheckEvent(taskElement);
-  addInputFocusEvent(taskElement);
-
+  addInputEvents(taskElement);
   return taskElement;
 }
 

@@ -201,6 +201,30 @@ main {
   background-color: var(--bg-color-body);
 }
 
+.valid {
+  background-color: var(--bg-color-list);
+}
+
+.not-valid {
+  background-color: var(--color-warning);
+}
+
+input[type='text'].not-valid:focus {
+  background-color: var(--color-warning);
+}
+
+input[type='text'].valid:focus {
+  background-color: var(--bg-color-body);
+}
+
+.lost-focus-with-errors {
+  animation: shake 0.82s
+    cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
 .task .icon {
   font-size: 17px;
   font-weight: 700;
@@ -252,7 +276,7 @@ main {
   content: '';
 }
 
-.clear-button:hover {
+.clear-button:hover:enabled {
   color: var(--bg-color-list);
   background-position: left center;
   transition: all;
@@ -270,4 +294,27 @@ main {
 
 .task .delete-button:hover {
   color: var(--color-warning);
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }

@@ -4,7 +4,8 @@ export function sortTasks(toDoTasks) {
   );
 }
 export function isEmpty(string) {
-  return !string.trim();
+  const pattern = /^(\s)+$/;
+  return pattern.test(string);
 }
 
 export function isValid(string) {
