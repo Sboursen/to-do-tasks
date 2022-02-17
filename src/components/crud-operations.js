@@ -5,6 +5,7 @@ import createTaskElement, {
   allocateSpaceForToDOList,
   getCheckedTaskElementId,
 } from './task-element-utils';
+import * as utils from './utils';
 
 export default class CRUD {
   constructor() {
@@ -40,7 +41,8 @@ export default class CRUD {
 
   doOnCheckboxChecked = (e) => {
     const id = e.target.id.split('-')[1];
-    const task = this.storageManagement.readLocalStorage()[id];
+    const task =
+      this.storageManagement.readLocalStorage()[id];
     this.storageManagement.changeTaskStatus(
       task,
       e.target.checked,
@@ -49,7 +51,8 @@ export default class CRUD {
 
   doOnDescriptionInputChanged = (e) => {
     const id = e.target.id.split('-')[1];
-    const task = this.storageManagement.readLocalStorage()[id];
+    const task =
+      this.storageManagement.readLocalStorage()[id];
     this.storageManagement.changeTaskDescription(
       task,
       e.target.value,
@@ -63,7 +66,8 @@ export default class CRUD {
       let remainingTasks = this.storageManagement
         .readLocalStorage()
         .filter((task) => task.index !== +id);
-      remainingTasks = this.storageManagement.resetIndices(remainingTasks);
+      remainingTasks =
+        this.storageManagement.resetIndices(remainingTasks);
       this.storageManagement.updateLocalStorage(
         remainingTasks,
       );
@@ -85,29 +89,34 @@ export default class CRUD {
       'li button.move-button',
     );
 
-    this.checkBoxes.forEach((checkbox) => checkbox.addEventListener(
-      'click',
-      this.doOnCheckboxChecked,
-    ));
-    this.descriptionInputs.forEach((input) => input.addEventListener(
-      'input',
-      this.doOnDescriptionInputChanged,
-    ));
-    this.deleteButtons.forEach((button) => button.addEventListener(
-      'click',
-      this.doOnDeleteButtonClicked,
-    ));
+    this.checkBoxes.forEach((checkbox) =>
+      checkbox.addEventListener(
+        'click',
+        this.doOnCheckboxChecked,
+      ),
+    );
+    this.descriptionInputs.forEach((input) =>
+      input.addEventListener(
+        'input',
+        this.doOnDescriptionInputChanged,
+      ),
+    );
+    this.deleteButtons.forEach((button) =>
+      button.addEventListener(
+        'click',
+        this.doOnDeleteButtonClicked,
+      ),
+    );
   };
-
-  sortTasks = (toDoTasks) => toDoTasks.sort((obj1, obj2) => obj1.index - obj2.index);
 
   initializeApplication = () => {
     this.storageManagement.initializeLocalStorage();
-    const toDoTasks = this.storageManagement.readLocalStorage();
+    const toDoTasks =
+      this.storageManagement.readLocalStorage();
 
     allocateSpaceForToDOList(this.listElement);
 
-    this.sortTasks(toDoTasks).forEach((task) => {
+    utils.sortTasks(toDoTasks).forEach((task) => {
       const taskElement = createTaskElement(task);
       this.listElement.appendChild(taskElement);
     });
@@ -141,6 +150,36 @@ export default class CRUD {
     );
   };
 
+  isInputValid = (inputValue) => {
+    let result = true;
+    let existingTasksDescriptions = this.storageManagement
+      .readLocalStorage()
+      .map((td) => td.description);
+    if (utils.isEmpty(inputValue)) {
+      console.log(
+        'Please enter a description for you task',
+      );
+
+      result = false;
+    } else if (!utils.isValid(inputValue)) {
+      console.log(
+        'Please use only alphanumeric characters',
+      );
+      result = false;
+    } else if (
+      utils.isDuplicate(
+        inputValue,
+        existingTasksDescriptions,
+      )
+    ) {
+      console.log(
+        'There is already a task that has the same description',
+      );
+      result = false;
+    }
+    return result;
+  };
+
   addNewTaskToList = (task) => {
     this.storageManagement.addToLocalStorage(task);
     const newTask = createTaskElement(task);
@@ -160,8 +199,12 @@ export default class CRUD {
   };
 
   onAddButtonClicked = () => {
-    this.addNewTaskToList(this.createNewTask());
-    this.clearTaskInput();
+    if (this.isInputValid(this.newTaskInput.value)) {
+      this.addNewTaskToList(this.createNewTask());
+      this.clearTaskInput();
+    } else {
+      console.log('Input is not valid');
+    }
   };
 
   getToBeDeletedTaskList = () => {
@@ -188,9 +231,10 @@ export default class CRUD {
     this.initializeApplication();
   };
 
-  getRemainingTasks = (checkedTasksIds) => this.storageManagement
-    .readLocalStorage()
-    .filter((t, i) => !checkedTasksIds.includes(i));
+  getRemainingTasks = (checkedTasksIds) =>
+    this.storageManagement
+      .readLocalStorage()
+      .filter((t, i) => !checkedTasksIds.includes(i));
 
   updateIndices = (remainingTasks) => {
     remainingTasks.forEach((task, index) => {
@@ -200,8 +244,10 @@ export default class CRUD {
   };
 
   removeTaskFromList = (checkedTasksIds) => {
-    const remainingTasks = this.getRemainingTasks(checkedTasksIds);
-    const updatedRemainingTasks = this.updateIndices(remainingTasks);
+    const remainingTasks =
+      this.getRemainingTasks(checkedTasksIds);
+    const updatedRemainingTasks =
+      this.updateIndices(remainingTasks);
     this.storageManagement.updateLocalStorage(
       updatedRemainingTasks,
     );
