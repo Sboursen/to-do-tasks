@@ -39,6 +39,7 @@ function onCheckboxToggle(e) {
   } else {
     description.style.textDecoration = 'none';
   }
+  enableClearButton();
 }
 
 function addCheckEvent(taskElement) {

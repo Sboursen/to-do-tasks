@@ -9,7 +9,7 @@ export function isEmpty(string) {
 }
 
 export function isValid(string) {
-  const pattern = /^(\w|-)+$/;
+  const pattern = /^(\w)+(\w|-|\s)*$/;
   return pattern.test(string.trim());
 }
 

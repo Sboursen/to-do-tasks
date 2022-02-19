@@ -122,6 +122,7 @@ main {
 }
 
 .title-section .icon {
+  visibility: hidden;
   font-size: 12px;
   font-weight: 700;
   padding: 6px;
@@ -286,7 +287,7 @@ input[type="text"].valid:focus {
   background-position: left center;
   transition: all;
   transition-timing-function: ease-in-out;
-  transition-duration: 200ms;
+  transition-duration: 50ms;
 }
 
 .input-section input:focus {

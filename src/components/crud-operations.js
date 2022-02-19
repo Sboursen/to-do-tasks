@@ -40,6 +40,11 @@ export default class CRUD {
       'click',
       this.onClearButtonClicked,
     );
+
+    this.newTaskInput.addEventListener(
+      'input',
+      this.onTaskInputValueChanged,
+    );
   }
 
   doOnCheckboxChecked = (e) => {
@@ -102,6 +107,18 @@ export default class CRUD {
       'click',
       this.doOnDeleteButtonClicked,
     ));
+  };
+
+  onTaskInputValueChanged = () => {
+    if (!utils.isValid(this.newTaskInput.value)) {
+      this.newTaskInput.classList.add('not-valid');
+      this.newTaskInput.classList.remove('valid');
+      enableClearButton();
+    } else {
+      this.newTaskInput.classList.remove('not-valid');
+      this.newTaskInput.classList.add('valid');
+      enableClearButton();
+    }
   };
 
   initializeApplication = () => {
