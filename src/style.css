@@ -119,6 +119,7 @@ main {
 }
 
 .title-section .icon {
+  visibility: hidden;
   font-size: 12px;
   font-weight: 700;
   padding: 6px;
