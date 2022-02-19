@@ -1,5 +1,5 @@
 import * as utils from './utils';
-import { clearButton } from './dom-elements';
+import { clearButton, newTaskInput } from './dom-elements';
 
 export function getCheckedTaskElementId(taskElement) {
   let res = -1;
@@ -81,8 +81,8 @@ function onDescriptionInputBlured(e) {
   taskElement.style.backgroundColor = 'transparent';
 
   if (
-    utils.isEmpty(descriptionInput.value)
-    || !utils.isValid(descriptionInput.value)
+    utils.isEmpty(descriptionInput.value) ||
+    !utils.isValid(descriptionInput.value)
   ) {
     toggleShake(descriptionInput);
     descriptionInput.focus();
@@ -95,8 +95,8 @@ function onDescriptionInputBlured(e) {
 function onDescriptionInputChanged(e) {
   const descriptionInput = e.target;
   if (
-    utils.isEmpty(descriptionInput.value)
-    || !utils.isValid(descriptionInput.value)
+    utils.isEmpty(descriptionInput.value) ||
+    !utils.isValid(descriptionInput.value)
   ) {
     descriptionInput.classList.add('not-valid');
     descriptionInput.classList.remove('valid');
@@ -129,29 +129,31 @@ function addInputEvents(taskElement) {
   );
 }
 
+
+
 export default function createTaskElement(task) {
   const tmpWrapper = document.createElement('div');
   const taskStringElement = `<li class="task" id="task-${
     task.index
   }">
         <input type="checkbox" name="check-${
-  task.index
-}" id="check-${task.index}" ${
-  task.completed ? 'checked' : null
-}>
+          task.index
+        }" id="check-${task.index}" ${
+    task.completed ? 'checked' : null
+  }>
         <label for="description" class="description">
           <input type="text" name="description" value="${
-  task.description
-}" id="description-${task.index}">
+            task.description
+          }" id="description-${task.index}">
         </label>
         <button type="button" class="icon move-button" id="moveButton-${
-  task.index
-}">
+          task.index
+        }">
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <button type="button" class="icon delete-button" id="deleteButton-${
-  task.index
-}">
+          task.index
+        }">
           <i class="fas fa-trash-alt"></i>
         </button>
       </li>`;
