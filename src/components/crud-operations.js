@@ -119,15 +119,14 @@ export default class CRUD {
   };
 
   onTaskInputValueChanged = () => {
-    if (
-      utils.isEmpty(this.newTaskInput.value) ||
-      !utils.isValid(this.newTaskInput.value)
-    ) {
+    if (!utils.isValid(this.newTaskInput.value)) {
       this.newTaskInput.classList.add('not-valid');
       this.newTaskInput.classList.remove('valid');
+      enableClearButton();
     } else {
       this.newTaskInput.classList.remove('not-valid');
       this.newTaskInput.classList.add('valid');
+      enableClearButton();
     }
   };
 

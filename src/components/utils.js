@@ -9,7 +9,7 @@ export function isEmpty(string) {
 }
 
 export function isValid(string) {
-  const pattern = /^(\w|-)+$/;
+  const pattern = /^(\w)+(\w|-|\s)*$/;
   return pattern.test(string.trim());
 }
 
@@ -20,8 +20,8 @@ export function isDuplicate(
   let result = false;
   existingTasksDescriptions.forEach((td) => {
     if (
-      string.trim().toUpperCase()
-      === td.trim().toUpperCase()
+      string.trim().toUpperCase() ===
+      td.trim().toUpperCase()
     ) {
       result = true;
     }

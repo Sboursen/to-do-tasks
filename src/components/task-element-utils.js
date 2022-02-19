@@ -39,6 +39,7 @@ function onCheckboxToggle(e) {
   } else {
     description.style.textDecoration = 'none';
   }
+  enableClearButton();
 }
 
 function addCheckEvent(taskElement) {
@@ -128,8 +129,6 @@ function addInputEvents(taskElement) {
     onDescriptionInputChanged,
   );
 }
-
-
 
 export default function createTaskElement(task) {
   const tmpWrapper = document.createElement('div');
