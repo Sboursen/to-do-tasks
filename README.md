@@ -27,7 +27,7 @@
 
 ## sneak peek
 
-![](src/asset/AwesomeBook2B.gif)
+![](./src/Gif/to-do-list.gif)
 
 ## Getting Started
 
