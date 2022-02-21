@@ -45,7 +45,23 @@ export default class CRUD {
       'input',
       this.onTaskInputValueChanged,
     );
+
+    this.newTaskInput.addEventListener(
+      'keydown',
+      this.doOnEnterPressed,
+    );
   }
+
+  doOnEnterPressed = (e) => {
+    if (e.keyCode === 13) {
+      if (utils.isValid(this.newTaskInput.value)) {
+        this.newTaskInput.classList.add('not-valid');
+        this.newTaskInput.classList.remove('valid');
+        enableClearButton();
+      }
+      this.onAddButtonClicked();
+    }
+  };
 
   doOnCheckboxChecked = (e) => {
     const id = e.target.id.split('-')[1];
