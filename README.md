@@ -5,10 +5,6 @@
 > **To-do list** is a tool that helps you to organize your day. It simply lists the things that you need to do and allows you to mark them as complete.
 > It was built as an introduction to web dev using ES6 and Webpack
 
-## Live app
-
-[Use the app live on your browser](https://sboursen.github.io/to-do-tasks/)
-
 ## Built With
 
 - Webpack
@@ -23,7 +19,8 @@
 - Milestone 2: **improved style**
 - Milestone 3: **crud operation**
 - Milestone 4: **user input validation**
-- Milestone 5: **final touches**
+- Milestone 5: **final style touches**
+- Milestone 6: **secure deploy**
 
 ## sneak peek
 
