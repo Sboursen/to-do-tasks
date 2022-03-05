@@ -33,7 +33,7 @@ function disableClearButton() {
 
 function onCheckboxToggle(e) {
   const checkbox = e.currentTarget;
-  const description = checkbox.parentNode.children[1];
+  const description = checkbox.parentNode.children[1].children[0];
   if (checkbox.checked) {
     description.style.textDecoration = 'line-through';
   } else {
@@ -46,7 +46,7 @@ function addCheckEvent(taskElement) {
   const checkbox = taskElement.querySelector(
     'input[type="checkbox"]',
   );
-  const description = checkbox.parentNode.children[1];
+  const description = checkbox.parentNode.children[1].children[0];
   if (checkbox.checked) {
     description.style.textDecoration = 'line-through';
   } else {
