@@ -9,7 +9,7 @@
 
 - Webpack
 - ![](https://img.shields.io/badge/HTML-5-orange)
-- ![](https://img.shields.io/badge/Tailwind-CSS-blue)
+- ![](https://img.shields.io/badge/CSS-3-blue)
 - ![](https://img.shields.io/badge/JavaScript-ES6-yellow)
 - ![](https://img.shields.io/badge/Webpack-5-green)
 
