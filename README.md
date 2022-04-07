@@ -35,7 +35,7 @@ To get a local copy up and running follow these simple example steps.
 
 #### Use the live Website
 
-[Awesome Books Website](https://sboursen.github.io/to-do-tasks/)
+[Todo-Tasks website](https://sboursen.github.io/to-do-tasks/)
 
 ### **Option 2**
 
